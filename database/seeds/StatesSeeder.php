@@ -1,5 +1,6 @@
 <?php
 
+use App\State;
 use Illuminate\Database\Seeder;
 
 class StatesSeeder extends Seeder
