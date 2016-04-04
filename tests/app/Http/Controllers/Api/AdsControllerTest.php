@@ -4,6 +4,7 @@ namespace Tests\App\Http\Controllers\Api;
 
 use App\Ad;
 use App\Category;
+use App\State;
 use App\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
@@ -44,6 +45,8 @@ class AdsControllerTest extends TestCase
 
         $user = factory(User::class)->create();
 
+        $state = factory(State::class)->create();
+
         $data = [
             'title' => 'Reptilians',
             'content' => 'Amazing book about reptilians',
@@ -51,6 +54,7 @@ class AdsControllerTest extends TestCase
             'accepts_trades' => true,
             'price' => 10,
             'category_id' => $category->id,
+            'state_id' => $state->id,
         ];
 
         $call = $this->actingAs($user)->post('api/ads', $data)->seeJson(['title' => 'Reptilians']);
