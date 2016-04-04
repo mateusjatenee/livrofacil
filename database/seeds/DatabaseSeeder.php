@@ -1,5 +1,7 @@
 <?php
 
+use App\Ad;
+use App\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,5 +15,10 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(CategoriesSeeder::class);
         $this->call(StatesSeeder::class);
+
+        factory(User::class, 10)->create()->each(function ($user) {
+            $fac = factory(Ad::class)->make(['category_id' => 1]);
+            $user->ads()->save($fac);
+        });
     }
 }

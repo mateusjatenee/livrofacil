@@ -1,0 +1,15 @@
+var Vue = require('vue');
+
+Vue.use(require('vue-resource'));
+Vue.http.headers.common['X-CSRF-TOKEN'] = $('meta[name="csrf-token"]').attr('content');
+
+import LandingPage from './components/Landing/Index.vue';
+
+new Vue({
+	el: 'body',
+
+	components: {
+		LandingPage
+	}
+
+});

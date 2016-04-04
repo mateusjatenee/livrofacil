@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
 
 class AdsController extends Controller
 {
@@ -17,8 +18,13 @@ class AdsController extends Controller
      */
     public function index()
     {
-        $ads = Ad::all();
-        return $ads;
+        $ads = Ad::query();
+
+        if (Input::get('state')) {
+            $ads->where('state_id', Input::get('state'));
+        }
+        $ads->orderBy('id', 'desc')->take(3);
+        return $ads->get();
     }
 
     /**
