@@ -19,11 +19,12 @@ class AdsController extends Controller
     public function index()
     {
         $ads = Ad::query();
+        $ads->with('state');
 
         if (Input::get('state')) {
             $ads->where('state_id', Input::get('state'));
         }
-        $ads->orderBy('id', 'desc')->take(3);
+        $ads->orderBy('id', 'desc')->take(4);
         return $ads->get();
     }
 

@@ -14,3 +14,5 @@
 Route::get('/', function () {
     return view('landing.index');
 });
+
+$router->resource('books', 'BooksController');

@@ -19,8 +19,8 @@ nav
       <ul class="right hide-on-med-and-down">
         <li><a href="/">Início</a></li>
         <li><a href="books">Livros</a></li>
-        <li><a href="#">Login</a></li>
-        <li><a href="#">Cadastro</a></li>
+        <li><a href="/auth/login">Login</a></li>
+        <li><a href="/auth/register">Cadastro</a></li>
 
       </ul>
 
@@ -54,17 +54,18 @@ nav
 
       <!--   Icon Section   -->
       <div class="row">
-	        <div class="col s12 m4" v-for="ad in ads">
+	        <div class="col s12 m3" v-for="ad in ads">
 	          <div class="card">
 	            <div class="card-image">
 	              <img src="images/placeholder.jpg">
-	              <span class="card-title">{{ ad.title }}</span>
+	              <span class="card-title">{{ ad.title }} — <strong>R$ {{ ad.price }},00</strong></span>
 	            </div>
 	            <div class="card-content">
 	              <p>{{ ad.content }}</p>
 	            </div>
 	            <div class="card-action">
-	              <a href="#">This is a link</a>
+	              <a href="/books/{{ ad.slug }}">Ver mais</a>
+	              <span class="right">{{ ad.state.name }}</span>
 	            </div>
 	          </div>
 	        </div>
@@ -82,7 +83,8 @@ nav
     <div class="container">
       <div class="row">
         <div class="col l6 s12">
-          <h5 class="white-text">Company Bio</h5>
+            <button data-target="modal1" class="btn modal-trigger">Modal</button>
+
           <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.</p>
 
 
@@ -113,6 +115,17 @@ nav
       </div>
     </div>
   </footer>
+
+   <div id="modal1" class="modal">
+    <div class="modal-content">
+      <h4>Modal Header</h4>
+      <p>A bunch of text</p>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>
+  </div>
+
   </template>
 
   <script>
@@ -130,6 +143,7 @@ export default {
 			localStorage.setItem('state_id', 14);
 		}
 		this.getLatestAds();
+
 	},
 
 	methods: {
@@ -139,7 +153,7 @@ export default {
 			}, (response) => {
 				console.log(response.data);
 			});
-		}
+		},
 	}
 }
 
