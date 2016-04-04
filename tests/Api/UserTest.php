@@ -1,9 +1,5 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-
 class UserTest extends TestCase
 {
     /**
@@ -11,8 +7,18 @@ class UserTest extends TestCase
      *
      * @return void
      */
-    public function testExample()
+    public function testUserCanRegister()
     {
-        $this->assertTrue(true);
+        $data = [
+            'name' => 'Mateus',
+            'email' => 'mateus@mguimaraes.co',
+            'password' => 'whatever123',
+        ];
+
+        $this->post('api/auth/register', $data)->seeJson([
+            'name' => 'Mateus',
+            'email' => 'mateus@mguimaraes.co',
+        ])->assertResponseStatus(200);
+
     }
 }
