@@ -1,5 +1,6 @@
 <?php
 
+use App\Ad;
 use App\Category;
 use App\State;
 use App\User;
@@ -42,7 +43,7 @@ class Ad extends TestCase
     }
 
     public function testAdsCanBeListed()
-    {
-
+    {   
+        $this->get('api/ads')->seeJson(['title' => 'Animal Farm'])->assertResponseStatus(200);
     }
 }
