@@ -1,5 +1,6 @@
 <?php
 
+use App\Ad;
 use App\Category;
 use App\State;
 use App\User;
@@ -21,16 +22,9 @@ class AdTest extends TestCase
         $state = factory(State::class)->create();
         $category = factory(Category::class)->create();
 
-        $data = [
-            'title' => 'Animal Farm',
-            'content' => 'An awesome book by George Orwell',
-            'is_donation' => false,
-            'accepts_trades' => true,
-            'price' => 10,
-            'category_id' => $category->id,
-        ];
+        $data = factory(Ad::class)->make(['category_id' => $category->id]);
 
-        $ad = $user->ads()->create($data);
+        $ad = $user->ads()->save($data);
         $this->assertEquals($ad->title, 'Animal Farm');
     }
 }

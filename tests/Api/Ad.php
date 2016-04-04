@@ -29,14 +29,7 @@ class Ad extends TestCase
 
         // let's try creating the book
 
-        $data = [
-            'title' => 'Animal Farm',
-            'content' => '<h2>This is an awesome book!</h2>  <br>  This is an awesome book by George Orwell.',
-            'is_donation' => false,
-            'accepts_trades' => true,
-            'price' => 10,
-            'category_id' => $category->id,
-        ];
+        $data = factory(Ad::class)->make(['category_id' => $category->id]);
 
         $a = $this->actingAs($user)
             ->post(route('api.ads.store'), $data)->seeJson([
@@ -45,6 +38,11 @@ class Ad extends TestCase
             'accepts_trades' => true,
             'price' => 10,
         ])->assertResponseStatus(200);
+
+    }
+
+    public function testAdsCanBeListed()
+    {
 
     }
 }

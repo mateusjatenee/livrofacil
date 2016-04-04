@@ -1,5 +1,6 @@
 <?php
 
+use App\Ad;
 use App\Category;
 use App\State;
 use App\User;
@@ -34,5 +35,15 @@ $factory->define(State::class, function (Faker\Generator $faker) {
 $factory->define(Category::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->sentence,
+    ];
+});
+
+$factory->define(Ad::class, function (Faker\Generator $faker) {
+    return [
+        'title' => 'Animal Farm',
+        'content' => '<h2>This is an awesome book!</h2>  <br>  This is an awesome book by George Orwell.',
+        'is_donation' => false,
+        'accepts_trades' => true,
+        'price' => 10,
     ];
 });
