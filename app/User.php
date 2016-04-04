@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Ad;
+use App\UserInfo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -23,4 +25,14 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function info()
+    {
+        return $this->hasOne(UserInfo::class);
+    }
+
+    public function ads()
+    {
+        return $this->hasMany(Ad::class);
+    }
 }

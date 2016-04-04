@@ -16,7 +16,6 @@ class CreateAdsTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->text('content');
-            $table->date('date');
             $table->boolean('is_donation');
             $table->boolean('accepts_trades')->nullable();
             $table->integer('price')->nullable();

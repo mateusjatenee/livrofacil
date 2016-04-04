@@ -18,6 +18,8 @@ class CreateUserInfosTable extends Migration
             $table->string('address')->nullable();
             $table->integer('state_id')->unsigned();
             $table->foreign('state_id')->references('id')->on('states')->onDelete('cascade');
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
