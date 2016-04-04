@@ -1,7 +1,12 @@
 <?php
 
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
+
 class UserTest extends TestCase
 {
+    use WithoutMiddleware;
+    use DatabaseMigrations;
     /**
      * A basic test example.
      *
