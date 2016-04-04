@@ -37,4 +37,22 @@ class AdsControllerTest extends TestCase
         $this->get('api/ads')->seeJson(['title' => 'Animal Farm'])->assertResponseStatus(200);
 
     }
+
+    public function testAnAdCanBeCreated()
+    {
+        $category = factory(Category::class)->create();
+
+        $user = factory(User::class)->create();
+
+        $data = [
+            'title' => 'Reptilians',
+            'content' => 'Amazing book about reptilians',
+            'is_donation' => false,
+            'accepts_trades' => true,
+            'price' => 10,
+            'category_id' => $category->id,
+        ];
+
+        $call = $this->actingAs($user)->post('api/ads', $data)->seeJson(['title' => 'Reptilians']);
+    }
 }
