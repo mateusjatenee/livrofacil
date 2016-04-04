@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Ad;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Http\Request;
@@ -15,7 +16,8 @@ class AdsController extends Controller
      */
     public function index()
     {
-        //
+        $ads = Ad::all();
+        return $ads;
     }
 
     /**
