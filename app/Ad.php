@@ -16,7 +16,7 @@ class Ad extends Model implements SluggableInterface
         'save_to' => 'slug',
     ];
 
-    protected $fillable = ['title', 'content', 'is_donation', 'accepts_trades', 'price', 'category_id', 'state_id', 'user_id'];
+    protected $fillable = ['title', 'content', 'is_donation', 'accepts_trades', 'price', 'city', 'category_id', 'state_id', 'user_id'];
 
     public function user()
     {

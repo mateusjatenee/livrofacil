@@ -11774,6 +11774,10 @@ var _Register = require('./components/auth/Register.vue');
 
 var _Register2 = _interopRequireDefault(_Register);
 
+var _Show = require('./components/Books/Show.vue');
+
+var _Show2 = _interopRequireDefault(_Show);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Vue = require('vue');
@@ -11786,12 +11790,62 @@ new Vue({
 
 	components: {
 		LandingPage: _Index2.default,
-		Register: _Register2.default
+		Register: _Register2.default,
+		BooksShow: _Show2.default
 	}
 
 });
 
-},{"./components/Landing/Index.vue":30,"./components/auth/Register.vue":31,"vue":27,"vue-resource":16}],30:[function(require,module,exports){
+},{"./components/Books/Show.vue":30,"./components/Landing/Index.vue":31,"./components/auth/Register.vue":32,"vue":27,"vue-resource":16}],30:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.default = {
+	data: function data() {
+		return {
+			ad: [],
+			errors: []
+		};
+	},
+
+
+	props: ['id'],
+
+	created: function created() {
+		this.getAd();
+	},
+
+
+	methods: {
+		getAd: function getAd() {
+			var _this = this;
+
+			var resource = this.$resource('/api/books{/id}');
+
+			resource.get({ id: this.id }).then(function (response) {
+				_this.$set('ad', response.data);
+			}, function (response) {
+				_this.$set('errors', response.data);
+			});
+		}
+	}
+};
+if (module.exports.__esModule) module.exports = module.exports.default
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"container\">\n\t<div class=\"row\">\n\t\t<div class=\"card col s12 m8\">\n\t\t\t<h1>{{ ad.title }}</h1>\n\t\t\t<hr>\n\t\t\t<p class=\"flow-text\">{{ ad.content }}</p>\n\t\t</div>\n\t          <div class=\"card blue-grey darken-1 col s12 m4\">\n\t            <div class=\"card-content white-text\">\n\t              <span class=\"card-title\">Contato:</span>\n\t              <p class=\"flow-text\">\n\t              \t{{ ad.user.name }} <br>\n\t              \t{{ ad.user.info.phone_number }} <br>\n\t              \t<strong v-if=\"!is_donation\">R$ {{ ad.price }},00</strong>\n\t              \t<strong v-if=\"is_donation\">Grátis</strong> <br>\n\t              \t<strong>{{ ad.city }} - {{ ad.state.name }}</strong>\n\t              </p>\n\t            </div>\n\t            <div class=\"card-action\">\n\t              <a href=\"#\">This is a link</a>\n\t              <a href=\"#\">This is a link</a>\n\t            </div>\n\t          </div>\n\t</div>\n</div>\n"
+if (module.hot) {(function () {  module.hot.accept()
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  var id = "/Users/mateus1/Dropbox/sideprojects/livrofacil/resources/assets/js/components/Books/Show.vue"
+  if (!module.hot.data) {
+    hotAPI.createRecord(id, module.exports)
+  } else {
+    hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+  }
+})()}
+},{"vue":27,"vue-hot-reload-api":2}],31:[function(require,module,exports){
 var __vueify_style__ = require("vueify-insert-css").insert(".hero-banner[_v-30f3c3ed] {\n  background: #2797b1 !important;\n  color: #fff;\n}\n.bold-text[_v-30f3c3ed] {\n  font-weight: 600;\n}\n")
 'use strict';
 
@@ -11816,7 +11870,7 @@ exports.default = {
 		getLatestAds: function getLatestAds() {
 			var _this = this;
 
-			this.$http.get('/api/ads', { state: localStorage.state_id }).then(function (response) {
+			this.$http.get('/api/books', { state: localStorage.state_id }).then(function (response) {
 				_this.$set('ads', response.data);
 			}, function (response) {
 				console.log(response.data);
@@ -11825,7 +11879,7 @@ exports.default = {
 	}
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n  <div class=\"section no-pad-bot hero-banner\" id=\"index-banner\" _v-30f3c3ed=\"\">\n    <div class=\"container\" _v-30f3c3ed=\"\">\n      <br _v-30f3c3ed=\"\"><br _v-30f3c3ed=\"\">\n      <h1 class=\"header center\" _v-30f3c3ed=\"\">Venda ou doe livros mais rápido do que nunca</h1>\n      <div class=\"row center\" _v-30f3c3ed=\"\">\n        <h5 class=\"header col s12 light\" _v-30f3c3ed=\"\">Usando o Livro Fácil, você se desfaz de seus livros em questão de minutos. :)</h5>\n      </div>\n      <div class=\"row center\" _v-30f3c3ed=\"\">\n        <a href=\"\" id=\"download-button\" class=\"btn-large waves-effect waves-light pink\" _v-30f3c3ed=\"\">Comece a anunciar</a>\n      </div>\n      <br _v-30f3c3ed=\"\"><br _v-30f3c3ed=\"\">\n\n    </div>\n  </div>\n\n\n  <div class=\"container\" _v-30f3c3ed=\"\">\n  \t<div class=\"row\" _v-30f3c3ed=\"\">\n  \t\t<div class=\"col s12 m12 center\" _v-30f3c3ed=\"\"><h1 class=\"bold-text\" _v-30f3c3ed=\"\">Livros anunciados recentemente</h1></div>\n  \t</div>\n    <div class=\"section\" _v-30f3c3ed=\"\">\n\n      <!--   Icon Section   -->\n      <div class=\"row\" _v-30f3c3ed=\"\">\n\t        <div class=\"col s12 m3\" v-for=\"ad in ads\" _v-30f3c3ed=\"\">\n\t          <div class=\"card\" _v-30f3c3ed=\"\">\n\t            <div class=\"card-image\" _v-30f3c3ed=\"\">\n\t              <img src=\"images/placeholder.jpg\" _v-30f3c3ed=\"\">\n\t              <span class=\"card-title\" _v-30f3c3ed=\"\">{{ ad.title }} — <strong _v-30f3c3ed=\"\">R$ {{ ad.price }},00</strong></span>\n\t            </div>\n\t            <div class=\"card-content\" _v-30f3c3ed=\"\">\n\t              <p _v-30f3c3ed=\"\">{{ ad.content }}</p>\n\t            </div>\n\t            <div class=\"card-action\" _v-30f3c3ed=\"\">\n\t              <a href=\"/books/{{ ad.slug }}\" _v-30f3c3ed=\"\">Ver mais</a>\n\t              <span class=\"right\" _v-30f3c3ed=\"\">{{ ad.state.name }}</span>\n\t            </div>\n\t          </div>\n\t        </div>\n      </div>\n\n    </div>\n    <br _v-30f3c3ed=\"\"><br _v-30f3c3ed=\"\">\n\n    <div class=\"section\" _v-30f3c3ed=\"\">\n\n    </div>\n  </div>\n\n  <footer class=\"page-footer orange\" _v-30f3c3ed=\"\">\n    <div class=\"container\" _v-30f3c3ed=\"\">\n      <div class=\"row\" _v-30f3c3ed=\"\">\n        <div class=\"col l6 s12\" _v-30f3c3ed=\"\">\n            <button data-target=\"modal1\" class=\"btn modal-trigger\" _v-30f3c3ed=\"\">Modal</button>\n\n          <p class=\"grey-text text-lighten-4\" _v-30f3c3ed=\"\">We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.</p>\n\n\n        </div>\n        <div class=\"col l3 s12\" _v-30f3c3ed=\"\">\n          <h5 class=\"white-text\" _v-30f3c3ed=\"\">Settings</h5>\n          <ul _v-30f3c3ed=\"\">\n            <li _v-30f3c3ed=\"\"><a class=\"white-text\" href=\"#!\" _v-30f3c3ed=\"\">Link 1</a></li>\n            <li _v-30f3c3ed=\"\"><a class=\"white-text\" href=\"#!\" _v-30f3c3ed=\"\">Link 2</a></li>\n            <li _v-30f3c3ed=\"\"><a class=\"white-text\" href=\"#!\" _v-30f3c3ed=\"\">Link 3</a></li>\n            <li _v-30f3c3ed=\"\"><a class=\"white-text\" href=\"#!\" _v-30f3c3ed=\"\">Link 4</a></li>\n          </ul>\n        </div>\n        <div class=\"col l3 s12\" _v-30f3c3ed=\"\">\n          <h5 class=\"white-text\" _v-30f3c3ed=\"\">Connect</h5>\n          <ul _v-30f3c3ed=\"\">\n            <li _v-30f3c3ed=\"\"><a class=\"white-text\" href=\"#!\" _v-30f3c3ed=\"\">Link 1</a></li>\n            <li _v-30f3c3ed=\"\"><a class=\"white-text\" href=\"#!\" _v-30f3c3ed=\"\">Link 2</a></li>\n            <li _v-30f3c3ed=\"\"><a class=\"white-text\" href=\"#!\" _v-30f3c3ed=\"\">Link 3</a></li>\n            <li _v-30f3c3ed=\"\"><a class=\"white-text\" href=\"#!\" _v-30f3c3ed=\"\">Link 4</a></li>\n          </ul>\n        </div>\n      </div>\n    </div>\n    <div class=\"footer-copyright\" _v-30f3c3ed=\"\">\n      <div class=\"container\" _v-30f3c3ed=\"\">\n      Made by <a class=\"orange-text text-lighten-3\" href=\"http://materializecss.com\" _v-30f3c3ed=\"\">Materialize</a>\n      </div>\n    </div>\n  </footer>\n\n   <div id=\"modal1\" class=\"modal\" _v-30f3c3ed=\"\">\n    <div class=\"modal-content\" _v-30f3c3ed=\"\">\n      <h4 _v-30f3c3ed=\"\">Modal Header</h4>\n      <p _v-30f3c3ed=\"\">A bunch of text</p>\n    </div>\n    <div class=\"modal-footer\" _v-30f3c3ed=\"\">\n      <a href=\"#!\" class=\" modal-action modal-close waves-effect waves-green btn-flat\" _v-30f3c3ed=\"\">Agree</a>\n    </div>\n  </div>\n\n  "
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n  <div class=\"section no-pad-bot hero-banner\" id=\"index-banner\" _v-30f3c3ed=\"\">\n    <div class=\"container\" _v-30f3c3ed=\"\">\n      <br _v-30f3c3ed=\"\"><br _v-30f3c3ed=\"\">\n      <h1 class=\"header center\" _v-30f3c3ed=\"\">Venda ou doe livros mais rápido do que nunca</h1>\n      <div class=\"row center\" _v-30f3c3ed=\"\">\n        <h5 class=\"header col s12 light\" _v-30f3c3ed=\"\">Usando o Livro Fácil, você se desfaz de seus livros em questão de minutos. :)</h5>\n      </div>\n      <div class=\"row center\" _v-30f3c3ed=\"\">\n        <a href=\"\" id=\"download-button\" class=\"btn-large waves-effect waves-light pink\" _v-30f3c3ed=\"\">Comece a anunciar</a>\n      </div>\n      <br _v-30f3c3ed=\"\"><br _v-30f3c3ed=\"\">\n\n    </div>\n  </div>\n\n\n  <div class=\"container\" _v-30f3c3ed=\"\">\n  \t<div class=\"row\" _v-30f3c3ed=\"\">\n  \t\t<div class=\"col s12 m12 center\" _v-30f3c3ed=\"\"><h1 class=\"bold-text\" _v-30f3c3ed=\"\">Livros anunciados recentemente</h1></div>\n  \t</div>\n    <div class=\"section\" _v-30f3c3ed=\"\">\n\n      <!--   Icon Section   -->\n      <div class=\"row\" _v-30f3c3ed=\"\">\n\t        <div class=\"col s12 m3\" v-for=\"ad in ads\" _v-30f3c3ed=\"\">\n\t          <div class=\"card\" _v-30f3c3ed=\"\">\n\t            <div class=\"card-image\" _v-30f3c3ed=\"\">\n\t              <img src=\"images/placeholder.jpg\" _v-30f3c3ed=\"\">\n\t              <span class=\"card-title\" _v-30f3c3ed=\"\">{{ ad.title }} — <strong v-if=\"!ad.is_donation\" _v-30f3c3ed=\"\">R$ {{ ad.price }},00</strong> <strong v-if=\"ad.is_donation\" _v-30f3c3ed=\"\">Grátis</strong></span>\n\t            </div>\n\t            <div class=\"card-content\" _v-30f3c3ed=\"\">\n\t              <p _v-30f3c3ed=\"\">{{ ad.content }}</p>\n\t            </div>\n\t            <div class=\"card-action\" _v-30f3c3ed=\"\">\n\t              <a href=\"/books/{{ ad.slug }}\" _v-30f3c3ed=\"\">Ver mais</a>\n\t              <span class=\"right\" _v-30f3c3ed=\"\"><strong _v-30f3c3ed=\"\">{{ ad.city }} - {{ ad.state.name }}</strong></span>\n\t            </div>\n\t          </div>\n\t        </div>\n      </div>\n\n    </div>\n    <br _v-30f3c3ed=\"\"><br _v-30f3c3ed=\"\">\n\n    <div class=\"section\" _v-30f3c3ed=\"\">\n\n    </div>\n  </div>\n\n  <footer class=\"page-footer orange\" _v-30f3c3ed=\"\">\n    <div class=\"container\" _v-30f3c3ed=\"\">\n      <div class=\"row\" _v-30f3c3ed=\"\">\n        <div class=\"col l6 s12\" _v-30f3c3ed=\"\">\n            <button data-target=\"modal1\" class=\"btn modal-trigger\" _v-30f3c3ed=\"\">Modal</button>\n\n          <p class=\"grey-text text-lighten-4\" _v-30f3c3ed=\"\">We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.</p>\n\n\n        </div>\n        <div class=\"col l3 s12\" _v-30f3c3ed=\"\">\n          <h5 class=\"white-text\" _v-30f3c3ed=\"\">Settings</h5>\n          <ul _v-30f3c3ed=\"\">\n            <li _v-30f3c3ed=\"\"><a class=\"white-text\" href=\"#!\" _v-30f3c3ed=\"\">Link 1</a></li>\n            <li _v-30f3c3ed=\"\"><a class=\"white-text\" href=\"#!\" _v-30f3c3ed=\"\">Link 2</a></li>\n            <li _v-30f3c3ed=\"\"><a class=\"white-text\" href=\"#!\" _v-30f3c3ed=\"\">Link 3</a></li>\n            <li _v-30f3c3ed=\"\"><a class=\"white-text\" href=\"#!\" _v-30f3c3ed=\"\">Link 4</a></li>\n          </ul>\n        </div>\n        <div class=\"col l3 s12\" _v-30f3c3ed=\"\">\n          <h5 class=\"white-text\" _v-30f3c3ed=\"\">Connect</h5>\n          <ul _v-30f3c3ed=\"\">\n            <li _v-30f3c3ed=\"\"><a class=\"white-text\" href=\"#!\" _v-30f3c3ed=\"\">Link 1</a></li>\n            <li _v-30f3c3ed=\"\"><a class=\"white-text\" href=\"#!\" _v-30f3c3ed=\"\">Link 2</a></li>\n            <li _v-30f3c3ed=\"\"><a class=\"white-text\" href=\"#!\" _v-30f3c3ed=\"\">Link 3</a></li>\n            <li _v-30f3c3ed=\"\"><a class=\"white-text\" href=\"#!\" _v-30f3c3ed=\"\">Link 4</a></li>\n          </ul>\n        </div>\n      </div>\n    </div>\n    <div class=\"footer-copyright\" _v-30f3c3ed=\"\">\n      <div class=\"container\" _v-30f3c3ed=\"\">\n      Made by <a class=\"orange-text text-lighten-3\" href=\"http://materializecss.com\" _v-30f3c3ed=\"\">Materialize</a>\n      </div>\n    </div>\n  </footer>\n\n   <div id=\"modal1\" class=\"modal\" _v-30f3c3ed=\"\">\n    <div class=\"modal-content\" _v-30f3c3ed=\"\">\n      <h4 _v-30f3c3ed=\"\">Modal Header</h4>\n      <p _v-30f3c3ed=\"\">A bunch of text</p>\n    </div>\n    <div class=\"modal-footer\" _v-30f3c3ed=\"\">\n      <a href=\"#!\" class=\" modal-action modal-close waves-effect waves-green btn-flat\" _v-30f3c3ed=\"\">Agree</a>\n    </div>\n  </div>\n\n  "
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -11841,7 +11895,7 @@ if (module.hot) {(function () {  module.hot.accept()
     hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
-},{"vue":27,"vue-hot-reload-api":2,"vueify-insert-css":28}],31:[function(require,module,exports){
+},{"vue":27,"vue-hot-reload-api":2,"vueify-insert-css":28}],32:[function(require,module,exports){
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)

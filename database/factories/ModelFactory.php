@@ -45,7 +45,8 @@ $factory->define(Ad::class, function (Faker\Generator $faker) {
         'is_donation' => false,
         'accepts_trades' => true,
         'price' => 10,
-        'state_id' => factory(State::class)->create()->id,
+        'state_id' => 14,
+        'city' => 'Belém',
         'category_id' => factory(Category::class)->create()->id,
     ];
 });

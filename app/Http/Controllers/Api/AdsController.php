@@ -18,14 +18,7 @@ class AdsController extends Controller
      */
     public function index()
     {
-        $ads = Ad::query();
-        $ads->with('state');
-
-        if (Input::get('state')) {
-            $ads->where('state_id', Input::get('state'));
-        }
-        $ads->orderBy('id', 'desc')->take(4);
-        return $ads->get();
+        return Ad::with('state')->orderBy('id', 'desc')->take(4)->get();
     }
 
     /**
@@ -59,7 +52,8 @@ class AdsController extends Controller
      */
     public function show($id)
     {
-        //
+        $ad = Ad::with(['user.info', 'state'])->find($id);
+        return $ad;
     }
 
     /**
@@ -94,5 +88,17 @@ class AdsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function adsByState()
+    {
+        $ads = Ad::query();
+        $ads->with('state');
+
+        if (Input::get('state')) {
+            $ads->where('state_id', Input::get('state'));
+        }
+        $ads->orderBy('id', 'desc')->take(4);
+        return $ads->get();
     }
 }

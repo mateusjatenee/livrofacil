@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Ad;
+use App\State;
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
 
 class BooksController extends Controller
 {
@@ -15,7 +15,7 @@ class BooksController extends Controller
      */
     public function index()
     {
-        //
+        return 'ok';
     }
 
     /**
@@ -25,7 +25,8 @@ class BooksController extends Controller
      */
     public function create()
     {
-        //
+        $states = State::all();
+        return view('books.create')->with(['states' => $states]);
     }
 
     /**
@@ -47,7 +48,8 @@ class BooksController extends Controller
      */
     public function show($id)
     {
-        //
+        $ad = Ad::with(['user', 'state'])->where('slug', $id)->firstOrFail();
+        return view('books.show')->with(['ad' => $ad]);
     }
 
     /**

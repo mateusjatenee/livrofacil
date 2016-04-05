@@ -36,14 +36,14 @@
 	          <div class="card">
 	            <div class="card-image">
 	              <img src="images/placeholder.jpg">
-	              <span class="card-title">{{ ad.title }} — <strong>R$ {{ ad.price }},00</strong></span>
+	              <span class="card-title">{{ ad.title }} — <strong v-if="!ad.is_donation">R$ {{ ad.price }},00</strong> <strong v-if="ad.is_donation">Grátis</strong></span>
 	            </div>
 	            <div class="card-content">
 	              <p>{{ ad.content }}</p>
 	            </div>
 	            <div class="card-action">
 	              <a href="/books/{{ ad.slug }}">Ver mais</a>
-	              <span class="right">{{ ad.state.name }}</span>
+	              <span class="right"><strong>{{ ad.city }} - {{ ad.state.name }}</strong></span>
 	            </div>
 	          </div>
 	        </div>
@@ -126,7 +126,7 @@ export default {
 
 	methods: {
 		getLatestAds() {
-			this.$http.get('/api/ads', {state: localStorage.state_id }).then((response) => {
+			this.$http.get('/api/books', {state: localStorage.state_id }).then((response) => {
 				this.$set('ads', response.data);
 			}, (response) => {
 				console.log(response.data);

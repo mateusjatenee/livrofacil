@@ -22,7 +22,7 @@ class AdsControllerTest extends TestCase
     public function testIndexStatusCodeShouldBe200()
     {
 
-        $this->visit('/api/ads')->seeStatusCode(200);
+        $this->visit('/api/books')->seeStatusCode(200);
     }
 
     public function testIndexShouldHaveAllRecords()
@@ -35,7 +35,7 @@ class AdsControllerTest extends TestCase
 
         $user->ads()->save($ad);
 
-        $this->get('api/ads')->seeJson(['title' => 'Animal Farm'])->assertResponseStatus(200);
+        $this->get('api/books')->seeJson(['title' => 'Animal Farm'])->assertResponseStatus(200);
 
     }
 
@@ -55,8 +55,9 @@ class AdsControllerTest extends TestCase
             'price' => 10,
             'category_id' => $category->id,
             'state_id' => $state->id,
+            'city' => 'Whatever',
         ];
 
-        $call = $this->actingAs($user)->post('api/ads', $data)->seeJson(['title' => 'Reptilians']);
+        $call = $this->actingAs($user)->post('api/books', $data)->seeJson(['title' => 'Reptilians']);
     }
 }

@@ -2,7 +2,7 @@
   <div class="nav-wrapper"><a id="logo-container" href="#" class="brand-logo"><img class="navbar-logo" src="/images/logo.png"></a>
     <ul class="right hide-on-med-and-down">
       <li><a href="/">Início</a></li>
-      <li><a href="books">Livros</a></li>
+      <li><a href="/books">Acervo de Livros</a></li>
       @if(!Auth::check())
       <li><a href="/login">Login</a></li>
       <li><a href="/register">Cadastro</a></li>
