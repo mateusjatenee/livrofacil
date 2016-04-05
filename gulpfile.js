@@ -1,5 +1,6 @@
 var elixir = require('laravel-elixir');
 require('laravel-elixir-vueify');
+require('laravel-elixir-stylus');
 /*
  |--------------------------------------------------------------------------
  | Elixir Asset Management
@@ -15,6 +16,7 @@ elixir(function(mix) {
     mix
     .browserify('app.js')
     .scripts(['assets/jquery.min.js', 'assets/materialize.min.js'], 'public/js/assets.js')
+    .stylus(['app.styl'])
     .styles(['materialize.min.css'])
-    .version(['js/app.js', 'js/assets.js', 'css/all.css']);
+    .version(['js/app.js', 'js/assets.js', 'css/all.css', 'css/app.css']);
 });

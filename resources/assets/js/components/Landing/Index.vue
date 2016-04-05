@@ -1,10 +1,4 @@
-<style lang="stylus" scoped>
-nav
-	background #2797B1 !important
-	box-shadow none !important
-	.nav-wrapper
-		padding 0 3em
-	
+<style lang="stylus" scoped>	
 .hero-banner
 	background #2797B1 !important
 	color #fff
@@ -14,22 +8,6 @@ nav
 </style>
 
 <template>
-  <nav role="navigation">
-    <div class="nav-wrapper"><a id="logo-container" href="#" class="brand-logo">Logo</a>
-      <ul class="right hide-on-med-and-down">
-        <li><a href="/">Início</a></li>
-        <li><a href="books">Livros</a></li>
-        <li><a href="/auth/login">Login</a></li>
-        <li><a href="/auth/register">Cadastro</a></li>
-
-      </ul>
-
-      <ul id="nav-mobile" class="side-nav">
-        <li><a href="#">Navbar Link</a></li>
-      </ul>
-      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
-    </div>
-  </nav>
   <div class="section no-pad-bot hero-banner" id="index-banner">
     <div class="container">
       <br><br>
