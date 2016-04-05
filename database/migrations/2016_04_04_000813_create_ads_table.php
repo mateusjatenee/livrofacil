@@ -20,6 +20,7 @@ class CreateAdsTable extends Migration
             $table->boolean('accepts_trades')->nullable();
             $table->integer('price')->nullable();
             $table->string('slug')->nullable();
+            $table->string('city');
             $table->integer('category_id')->unsigned();
             $table->foreign('category_id')->references('id')->on('categories');
             $table->integer('state_id')->unsigned();

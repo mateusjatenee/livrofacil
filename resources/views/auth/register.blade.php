@@ -22,6 +22,7 @@
     <div class="row">
         <div class="card col s12 offset-m3 m6 offset-l4 l4 z-depth-4">
             <div class="card-content">
+            <div class="col s12 pink white-text z-depth-1 flow-text">Whatever</div>
                 <div class="row">
                     <div class="col s12 center-align">
                         <h5>Registro</h5>
@@ -46,7 +47,7 @@
                     </div>
                     <div class="row">
                         <div class="input-field col s12">
-                            <button type="submit" class="pink waves-effect waves-light btn btn-large col s12">Login</button>
+                            <button type="submit" class="pink waves-effect waves-light btn btn-large col s12">Cadastrar</button>
                         </div>
                     </div>
                 </form>
